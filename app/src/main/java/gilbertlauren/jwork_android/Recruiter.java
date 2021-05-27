@@ -6,7 +6,11 @@ public class Recruiter {
     private String phoneNumber;
     private Location location;
 
-    public Recruiter(int id, String name, String email, String phoneNumber, Location location1) {
+    public Recruiter(int id, String name, String email, String phoneNumber, Location location) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.location = location;
     }
 
     public String getName() {

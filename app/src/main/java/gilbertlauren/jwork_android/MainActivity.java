@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
         expListView = findViewById(R.id.lvExp);
 
+        listAdapter = new MainListAdapter(getApplicationContext(), listRecruiter, childMapping);
+        expListView.setAdapter(listAdapter);
+
         refreshList();
-
-
-
     }
 
     private void refreshList() {
@@ -87,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-
-                    listAdapter = new MainListAdapter(getApplicationContext(), listRecruiter, childMapping);
-                    expListView.setAdapter(listAdapter);
+                    listAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e("Error", "JSON ERROR", e);
                 }
