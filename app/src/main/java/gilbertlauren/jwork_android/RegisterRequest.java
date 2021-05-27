@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    private static final String URL = "http://172.20.10.3:8080/jobseeker/register";
+    private static final String URL = "http://192.168.1.58:8080/jobseeker/register";
     private Map<String, String> params;
 
     public RegisterRequest(String name,

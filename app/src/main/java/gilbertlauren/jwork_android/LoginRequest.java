@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String URL = "http://172.20.10.3:8080/jobseeker/login";
+    private static final String URL = "http://192.168.1.58:8080/jobseeker/login";
     private Map<String, String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener) {
