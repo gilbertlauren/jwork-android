@@ -1,5 +1,4 @@
 package gilbertlauren.jwork_android;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
@@ -7,26 +6,27 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * Class MenuRequest
+ * Class Bonus Request
  *
  * @author Gilbert Lauren
  * @version 6/28/2021
  */
-public class MenuRequest extends StringRequest {
-    private static final String URL = "http://192.168.1.58:8080/job";
-        private Map<String,String> params;
+public class BonusRequest extends StringRequest {
+    private static final String URL = "http://192.168.1.58:8080/bonus/";
+    private Map<String,String> params;
 
     /**
-     * Constructor for MenuRequest
+     * handle all bonus request
+     * @param referralCode
      * @param listener
      */
-    public MenuRequest(Response.Listener<String> listener) {
-        super(Method.GET, URL, listener, null);
+    public BonusRequest(String referralCode, Response.Listener<String> listener) {
+        super(Method.GET, URL+referralCode, listener, null);
         params = new HashMap<>();
     }
 
     /**
-     * Auth error
+     *
      * @return
      * @throws AuthFailureError
      */

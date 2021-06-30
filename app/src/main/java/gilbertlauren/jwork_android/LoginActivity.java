@@ -16,21 +16,25 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/**
+ * Class LoginActivity
+ *
+ * @author Gilbert Lauren
+ * @version 6/28/2021
+ */
 public class LoginActivity extends AppCompatActivity {
-    private EditText etEmail, etPassword;
-    private Button btnLogin;
-    private TextView tvRegister;
-
+    //oncreate function
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //initiate variables based on their location in layout
         setContentView(R.layout.activity_login);
-        etEmail = findViewById(R.id.editTextLoginEmailAddress);
-        etPassword = findViewById(R.id.editTextLoginPassword);
-        btnLogin = findViewById(R.id.buttonLogin);
-        tvRegister = findViewById(R.id.textViewRegister);
+        EditText etEmail = findViewById(R.id.et_email);
+        EditText etPassword = findViewById(R.id.et_password);
+        Button btnLogin = findViewById(R.id.btn_login);
+        TextView tvRegister = findViewById(R.id.tv_register);
 
+        //login button function
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,13 +46,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if(jsonObject != null) {
-                                Toast.makeText(LoginActivity.this, "Login Successful, Hello " + jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
+                            if (jsonObject != null) {
+                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                loginIntent.putExtra("jobseekerId", jsonObject.getInt("id"));
+                                loginIntent.addFlags(loginIntent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(loginIntent);
+                                finish();
                             }
                         } catch (JSONException e) {
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                            e.printStackTrace();
+
                         }
                     }
                 };
@@ -56,10 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
-
             }
         });
-
+//register button to move to register page
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
